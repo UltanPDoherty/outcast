@@ -8,14 +8,13 @@
 \description{
 Exported Functions:
 \itemize{
-\item \code{ombc_gmm} - Identify multivariate outliers while clustering the data with
-a Gaussian mixture model.
-\item \code{ombc_mlr} - Identify response variable outliers while fitting a multiple
-linear regression model to the data.
-\item \code{simulate_noisy_gmm} - Simulate data from a Gaussian mixture model with
-multivariate outliers.
-\item \code{simulate_noisy_mlr} - Simulate data from a multiple linear regression
-model with response variable outliers.
+\item \code{find_elbow} - .
+\item \code{find_gross} - .
+\item \code{fit_gmm} - .
+\item \code{outcast_gmm} - .
+\item \code{outback_gmm} - .
+\item \code{plot_gross} - .
+\item \code{simulate_gmm} - .
 }
 }
 \author{

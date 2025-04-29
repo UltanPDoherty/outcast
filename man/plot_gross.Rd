@@ -5,12 +5,12 @@
 \title{Plot sorted dbscan::glosh values to determine the \code{search_centre} for
 \code{find_gross}.}
 \usage{
-plot_gross(x, k_neighbours = 10)
+plot_gross(x, k_neighbours = floor(nrow(x)/100))
 }
 \arguments{
 \item{x}{Data set.}
 
-\item{k_neighbours}{Number of neighbours for dbscan::glosh}
+\item{k_neighbours}{Number of neighbours for dbscan::kNNdist.}
 }
 \value{
 A ggplot2 object

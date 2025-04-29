@@ -2,7 +2,9 @@
 #'
 #' @inheritParams find_elbow
 #' @inheritParams outcast_gmm
-#' @param k_neighbours Number of neighbours for dbscan::glosh
+#' @param k_neighbours Number of neighbours for dbscan::kNNdist.
+#' @param underestimate Factor by which elbow choice is mutliplied to get the
+#'                      gross choice.
 #' @param choice Optional preset number of gross outliers.
 #'
 #' @return List:
@@ -16,23 +18,22 @@ find_gross <- function(
     k_neighbours = floor(nrow(x) / 100),
     underestimate = 0.5,
     choice = NULL) {
-  
   stopifnot(!is.null(search_centre))
-  
+
   x_knndist <- dbscan::kNNdist(x, k_neighbours)
   knndist_sort <- -sort(-x_knndist)
-  
+
   elbow <- find_elbow(knndist_sort, search_centre, TRUE)
 
   if (is.null(choice)) {
     choice <- elbow$choice
   }
-  
+
   gross_choice <- floor(choice * underestimate)
 
   bool <- rank(-x_knndist) <= gross_choice
-  
-  plot <- elbow$plot + 
+
+  plot <- elbow$plot +
     ggplot2::geom_vline(xintercept = gross_choice, colour = "red") +
     ggplot2::labs(
       subtitle = paste0(
@@ -53,9 +54,8 @@ find_gross <- function(
 #'
 #' @export
 plot_gross <- function(x, k_neighbours = floor(nrow(x) / 100)) {
-
   x_knndist <- dbscan::kNNdist(x, k_neighbours)
-  
+
   outlier_seq <- seq_len(nrow(x))
   knndist_sort <- -sort(-x_knndist)
   gg <- data.frame(outlier_seq, knndist_sort) |>

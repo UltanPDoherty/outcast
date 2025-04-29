@@ -150,7 +150,7 @@ outback_gmm <- function(
 
     dens_mat <- matrix(nrow = obs_num, ncol = comp_num)
     for (k in 1:comp_num) {
-      dens_mat[, k] <- dmvnorm(
+      dens_mat[, k] <- mvtnorm::dmvnorm(
         x0,
         mean = mix$best_model$model_obj[[1]]$mu[[k]],
         sigma = mix$best_model$model_obj[[1]]$sigs[[k]]
@@ -188,5 +188,5 @@ init_kmpp <- function(x, comp_num, seed) {
     z[, k] <- as.integer(init == k)
   }
 
-  return(z)
+  z
 }
